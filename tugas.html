@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="tugas.css" />
+</head>
+<br>
+  <div class="container">
+    <h2>Calculator</h2>
+    
+    <label for="bil1">Bilangan 1:</label>
+    <input type="number" id="bil1" name="bil1" />
+    
+    <label for="bil2">Bilangan 2:</label>
+    <input type="number" id="bil2" name="bil2" />
+    
+    <label for="operation">Pilih Operasi:</label>
+    <select id="operation">
+      <option value="penjumlahan">Penjumlahan</option>
+      <option value="pengurangan">Pengurangan</option>
+      <option value="perkalian">Perkalian</option>
+      <option value="pembagian">Pembagian</option>
+      <option value="eksponen">Eksponen</option>
+      <option value="modulus">Modulus</option>
+   
+    </select>
+    
+    Hasil = <span id="hasil" class="result"></span>
+    <br />
+    <button onclick="hitung()">Hitung</button>
+    <div> <button  class="back-button" onclick=window.location.href="crement.html">Kalkulator Crement</button> </div>
+    <a href="index.html">
+     <br>
+      <div class="caption">Created by kelompok 2</div>
+
+  </div>
+  
+  <script src="tugas.js"></script>
+
+</body>
+</html>

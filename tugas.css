@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .container {
+    background: rgba(245, 167, 255, 0.158);
+    border-radius: 15px;
+    box-shadow: 0 0px 15px rgba(254, 216, 255, 0.541);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(15px); /* Efek blur */
+   
+  }
+  label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+  input, select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(246, 212, 255, 0.315);
+    margin-bottom: 10px;
+    background: rgba(160, 81, 155, 0.26); /* Warna latar belakang semi-transparan */
+    color: #333;
+    backdrop-filter: blur(10px); /* Efek blur */
+    -webkit-backdrop-filter: blur(10px); /* Untuk kompatibilitas dengan Safari */
+  }
+  button {
+    background-color: #f5ceff4d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button:hover {
+    background-color: #c847e256;
+    backdrop-filter: blur(10px); /* Efek blur saat hover */
+    -webkit-backdrop-filter: blur(10px); /* Untuk kompatibilitas dengan Safari */
+  }
+  .result {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+
+  .back-button {
+
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.02); /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.4); /* Lighten the glass effect */
+    color: #000; /* Change text color on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
