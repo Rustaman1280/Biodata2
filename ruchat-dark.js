@@ -7,8 +7,7 @@ async function sendMessage(message) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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'
-        },
+            'Authorization': 'Bearer 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'  },
         body: JSON.stringify({
             model: 'gpt-3.5-turbo',
             messages: [
