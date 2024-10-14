@@ -51,7 +51,7 @@
         a.btn {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center the text */
+            justify-content: center;
             text-decoration: none;
             color: white;
             background: rgba(255, 255, 255, 0.25);
@@ -61,14 +61,14 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
-        a.btn:hover {
-            background: rgba(255, 255, 255, 0.45);
-            transform: scale(1.05);
-        }
         a.btn img {
             width: 20px;
             height: 20px;
-            margin-right: 10px; /* Space between icon and text */
+            margin-right: 10px;
+        }
+        a.btn:hover {
+            background: rgba(255, 255, 255, 0.45);
+            transform: scale(1.05);
         }
         @media (max-width: 1000px) {
             .container {
@@ -85,11 +85,21 @@
             <p>Welcome to our website</p>
         </div>
         <div class="links">
-            <a href="#" class="btn"><img src="tentang_kami_icon.png" alt="Tentang Kami">Tentang Kami Semua</a>
-            <a href="https://www.tiktok.com/@sepuluhppl1_?_t=8qWyuZh2UtW&_r=1" class="btn"><img src="tiktok_icon.png" alt="TikTok">TikTok</a>
-            <a href="https://www.instagram.com/sepuluhppl.1?igsh=MWkwbjJzcTJnNjlhbA==" class="btn"><img src="instagram_icon.png" alt="Instagram">Instagram</a>
-            <a href="#" class="btn"><img src="foto_foto_icon.png" alt="Foto-foto Kita">Foto-foto Kita</a>
-            <a href="https://iamhealthy.eu.org/crement" class="btn"><img src="calculator_icon.png" alt="Kalkulator">Kalkulator</a>
+            <a href="#" class="btn">
+                <img src="tentang_kami_icon.png" alt="Tentang Kami">Tentang Kami Semua
+            </a>
+            <a href="https://www.tiktok.com/@sepuluhppl1_?_t=8qWyuZh2UtW&_r=1" class="btn">
+                <img src="tiktok_icon.png" alt="TikTok">TikTok
+            </a>
+            <a href="https://www.instagram.com/sepuluhppl.1?igsh=MWkwbjJzcTJnNjlhbA==" class="btn">
+                <img src="instagram_icon.png" alt="Instagram">Instagram
+            </a>
+            <a href="#" class="btn">
+                <img src="foto_icon.png" alt="Foto-foto Kita">Foto-foto Kita
+            </a>
+            <a href="https://iamhealthy.eu.org/crement" class="btn">
+                <img src="kalkulator_icon.png" alt="Kalkulator">Kalkulator
+            </a>
         </div>
     </div>
 </body>
