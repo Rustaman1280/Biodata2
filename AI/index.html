@@ -56,33 +56,52 @@
     <div class="response" id="response"></div>
   </div>
 
-  <script>
-    const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyAz1QL2lZah37FuFC5N1sPELCiyb11bG8I"; // Ganti dengan API Gemini kamu
+  <script type="module">
+    import { GoogleGenerativeAI } from "@google/generative-ai";
 
-    function sendMessage() {
+    async function sendMessage() {
       const input = document.getElementById('userInput');
       const responseContainer = document.getElementById('response');
       const message = input.value;
-      
-      // Simulasi panggilan API (sesuaikan dengan API Gemini)
-      const mockResponse = generateAIResponse(message);
 
-      // Tampilkan respons di UI
-      responseContainer.textContent = mockResponse;
-      
+      // Inisiasi Google Generative AI
+      const genAI = new GoogleGenerativeAI('AIzaSyAz1QL2lZah37FuFC5N1sPELCiyb11bG8I');
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+      try {
+        // Kirim prompt ke AI
+        const result = await model.generateContent(message);
+
+        // Tampilkan respons AI dengan gaya bahasa kasual + Sunda
+        responseContainer.textContent = modifyResponse(result.response.text());
+      } catch (error) {
+        responseContainer.textContent = "Maaf, ada kesalahan!";
+      }
+
       // Setelah mengirim, disable kolom input dan tombol
       input.style.display = 'none';
       document.getElementById('sendBtn').disabled = true;
     }
 
-    function generateAIResponse(message) {
-      // Fungsi sementara untuk menampilkan jawaban AI campuran bahasa kasual dan Sunda
-      const responses = [
-        "Eh, jadi gini... anu tadi tuh, bisa dicobakeun deui we ya.",
-        "Hehe, nuju kumaha we, bisi aya nu teu kahartos.",
-        "Ahh, nyaho teuing euy... cobakeun diulik deui lah!"
-      ];
-      return responses[Math.floor(Math.random() * responses.length)];
+    function modifyResponse(text) {
+      // Ubah gaya bahasa AI ke lebih kasual + Sunda
+      const sundaneseWords = ['teuing', 'ulah', 'heula', 'keur', 'geura', 'rek'];
+      let modifiedText = text
+        .replace(/\./g, ' we.')
+        .replace(/!/, ' lah!')
+        .replace(/,/g, ' nya,');
+      
+      // Tambahkan kata Sunda secara acak
+      sundaneseWords.forEach((word) => {
+        const randomPosition = Math.floor(Math.random() * modifiedText.length);
+        modifiedText = [
+          modifiedText.slice(0, randomPosition),
+          word,
+          modifiedText.slice(randomPosition)
+        ].join(' ');
+      });
+      
+      return modifiedText;
     }
   </script>
 </body>
