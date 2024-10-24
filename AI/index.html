@@ -3,109 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat AI Gemini</title>
+  <title>AI Gemini Chat</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f5f5f5;
-      margin: 0;
-    }
-    .chat-container {
-      background-color: white;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      margin: 40px;
       text-align: center;
     }
-    .chat-container input[type="text"] {
-      width: 100%;
+    input, button {
+      font-size: 16px;
       padding: 10px;
-      margin: 10px 0;
-      border-radius: 15px;
-      border: 1px solid #ddd;
-      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin: 10px;
     }
-    .chat-container button {
-      padding: 10px 15px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .chat-container button:disabled {
-      background-color: #bbb;
-    }
-    .response {
+    #response {
       margin-top: 20px;
-      font-size: 18px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
 </head>
 <body>
-  <div class="chat-container">
-    <h2>Gemini Chatbot</h2>
-    <input type="text" id="userInput" placeholder="Tanya sesuatu...">
-    <button id="sendBtn" onclick="sendMessage()">Kirim</button>
-    <div class="response" id="response"></div>
-  </div>
+
+  <h1>Chat with AI Gemini</h1>
+  <input type="text" id="userInput" placeholder="Ketik sesuatu..." />
+  <button id="sendBtn">Kirim</button>
+
+  <div id="response"></div>
 
   <script type="module">
-    import {
-      "@google/generative-ai": "https://esm.run/@google/generative-ai"
-    }
-    import { GoogleGenerativeAI } from "@google/generative-ai";
+    // Menggunakan CDN untuk mengimpor Google Generative AI SDK
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-    async function sendMessage() {
+    document.getElementById('sendBtn').addEventListener('click', async () => {
       const input = document.getElementById('userInput');
       const responseContainer = document.getElementById('response');
       const message = input.value;
 
-      // Inisiasi Google Generative AI
-      const genAI = new GoogleGenerativeAI('AIzaSyAz1QL2lZah37FuFC5N1sPELCiyb11bG8I');
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      if (!message) return alert('Silakan masukkan pesan!');
+
+      // Masukkan API key kamu di sini
+      const apiKey = 'AIzaSyAz1QL2lZah37FuFC5N1sPELCiyb11bG8I'; 
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       try {
-        // Kirim prompt ke AI
-        const result = await model.generateContent(message);
+        // Mengirim request ke model AI
+        const result = await model.generateContent({ prompt: message });
+        const aiResponse = result.candidates[0].output;
 
-        // Tampilkan respons AI dengan gaya bahasa kasual + Sunda
-        responseContainer.textContent = modifyResponse(result.response.text());
+        // Tampilkan respons di halaman
+        responseContainer.textContent = aiResponse;
       } catch (error) {
-        responseContainer.textContent = "Maaf, ada kesalahan!";
+        console.error(error);
+        responseContainer.textContent = "Maaf, terjadi kesalahan!";
       }
 
-      // Setelah mengirim, disable kolom input dan tombol
+      // Setelah mengirim, sembunyikan input
       input.style.display = 'none';
       document.getElementById('sendBtn').disabled = true;
-    }
-
-    function modifyResponse(text) {
-      // Ubah gaya bahasa AI ke lebih kasual + Sunda
-      const sundaneseWords = ['teuing', 'ulah', 'heula', 'keur', 'geura', 'rek'];
-      let modifiedText = text
-        .replace(/\./g, ' we.')
-        .replace(/!/, ' lah!')
-        .replace(/,/g, ' nya,');
-      
-      // Tambahkan kata Sunda secara acak
-      sundaneseWords.forEach((word) => {
-        const randomPosition = Math.floor(Math.random() * modifiedText.length);
-        modifiedText = [
-          modifiedText.slice(0, randomPosition),
-          word,
-          modifiedText.slice(randomPosition)
-        ].join(' ');
-      });
-      
-      return modifiedText;
-    }
+    });
   </script>
+
 </body>
 </html>
