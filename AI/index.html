@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat AI Gemini</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+    .chat-container {
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .chat-container input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 15px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    .chat-container button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .chat-container button:disabled {
+      background-color: #bbb;
+    }
+    .response {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>Gemini Chatbot</h2>
+    <input type="text" id="userInput" placeholder="Tanya sesuatu...">
+    <button id="sendBtn" onclick="sendMessage()">Kirim</button>
+    <div class="response" id="response"></div>
+  </div>
+
+  <script>
+    const apiUrl = "https://api.gemini.com/AIzaSyAz1QL2lZah37FuFC5N1sPELCiyb11bG8I"; // Ganti dengan API Gemini kamu
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const responseContainer = document.getElementById('response');
+      const message = input.value;
+      
+      // Simulasi panggilan API (sesuaikan dengan API Gemini)
+      const mockResponse = generateAIResponse(message);
+
+      // Tampilkan respons di UI
+      responseContainer.textContent = mockResponse;
+      
+      // Setelah mengirim, disable kolom input dan tombol
+      input.style.display = 'none';
+      document.getElementById('sendBtn').disabled = true;
+    }
+
+    function generateAIResponse(message) {
+      // Fungsi sementara untuk menampilkan jawaban AI campuran bahasa kasual dan Sunda
+      const responses = [
+        "Eh, jadi gini... anu tadi tuh, bisa dicobakeun deui we ya.",
+        "Hehe, nuju kumaha we, bisi aya nu teu kahartos.",
+        "Ahh, nyaho teuing euy... cobakeun diulik deui lah!"
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  </script>
+</body>
+</html>
