@@ -4,24 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NGL YUK!</title>
+    <style>
+        /* Mengatur latar belakang dan pusatkan konten */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* Style untuk card form */
+        form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Style untuk heading */
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Style untuk label */
+        label {
+            display: block;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        /* Style untuk input */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #6c63ff;
+        }
+
+        /* Style untuk tombol submit */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5a54d6;
+        }
+
+        /* Style untuk pesan sukses */
+        #message {
+            color: #28a745;
+            font-size: 16px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h2>NGL buat X-PPL 1</h2>
     <form id="nglForm">
-        <label for="input1">Input 1:</label>
-        <input type="text" name="entry.2141062723" placeholder="boleh anonim kok"><br><br>
+        <label for="input1">Nama:</label>
+        <input type="text" name="entry.2141062723" placeholder="boleh anonim kok">
         
-        <label for="input2">Input 2:</label>
-        <input type="text" name="entry.1425819079" placeholder="jangan aneh aneh ya"><br><br>
+        <label for="input2">Pesan:</label>
+        <input type="text" name="entry.1425819079" placeholder="jangan aneh aneh ya">
         
         <button type="submit">Submit</button>
     </form>
 
-    <p id="message" style="color: green; display: none;">Jawaban kamu sudah tersimpan!</p>
+    <p id="message">Jawaban kamu sudah tersimpan!</p>
 
     <script>
         document.getElementById("nglForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Mencegah pengalihan halaman
+            event.preventDefault();
 
             var formData = new FormData(this);
 
@@ -30,8 +108,8 @@
                 body: formData,
                 mode: "no-cors"
             }).then(() => {
-                document.getElementById("message").style.display = "block"; // Menampilkan pesan sukses
-                document.getElementById("nglForm").reset(); // Mengosongkan form
+                document.getElementById("message").style.display = "block";
+                document.getElementById("nglForm").reset();
             }).catch(error => {
                 console.error("Error:", error);
             });
