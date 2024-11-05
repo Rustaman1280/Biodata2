@@ -5,87 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NGL YUK!</title>
     <style>
-        /* Mengatur latar belakang dan pusatkan konten */
+        /* Atur latar belakang dengan gradient lembut */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f2f5;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            font-family: 'Arial', sans-serif;
             margin: 0;
         }
 
-        /* Style untuk card form */
+        /* Container utama form */
         form {
             background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            width: 320px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
-        /* Style untuk heading */
+        /* Efek hover pada form */
+        form:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Style untuk judul */
         h2 {
             color: #333;
             margin-bottom: 20px;
             font-size: 24px;
+            position: relative;
         }
 
-        /* Style untuk label */
+        /* Garis animasi di bawah judul */
+        h2::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #6c63ff;
+            margin: 8px auto 0;
+            animation: grow 1s ease forwards;
+        }
+
+        /* Label input */
         label {
             display: block;
             font-weight: bold;
             color: #555;
             margin-bottom: 8px;
             text-align: left;
+            font-size: 14px;
         }
 
-        /* Style untuk input */
+        /* Input teks */
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             outline: none;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
+        /* Efek fokus pada input */
         input[type="text"]:focus {
             border-color: #6c63ff;
+            box-shadow: 0 0 8px rgba(108, 99, 255, 0.3);
         }
 
-        /* Style untuk tombol submit */
+        /* Tombol submit */
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #6c63ff;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 16px;
             transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        button:hover {
-            background-color: #5a54d6;
+        /* Animasi hover pada tombol */
+        button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.3s ease;
+        }
+        
+        button:hover::before {
+            left: 100%;
         }
 
-        /* Style untuk pesan sukses */
+        /* Pesan sukses */
         #message {
             color: #28a745;
             font-size: 16px;
             margin-top: 15px;
             display: none;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* Animasi untuk garis judul */
+        @keyframes grow {
+            from { width: 0; }
+            to { width: 50px; }
+        }
+
+        /* Animasi untuk pesan sukses */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <h2>NGL buat X-PPL 1</h2>
     <form id="nglForm">
+        <h2>NGL buat X-PPL 1</h2>
         <label for="input1">Nama:</label>
         <input type="text" name="entry.2141062723" placeholder="boleh anonim kok">
         
@@ -93,9 +145,8 @@
         <input type="text" name="entry.1425819079" placeholder="jangan aneh aneh ya">
         
         <button type="submit">Submit</button>
+        <p id="message">Jawaban kamu sudah tersimpan!</p>
     </form>
-
-    <p id="message">Jawaban kamu sudah tersimpan!</p>
 
     <script>
         document.getElementById("nglForm").addEventListener("submit", function(event) {
