@@ -9,12 +9,13 @@
 }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f0faff;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(to bottom, #4070f4 50%, #f0faff 50%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
+
 
 .wrapper {
   position: relative;
@@ -23,7 +24,7 @@ body {
   border-radius: 12px;
   padding: 20px 30px 120px;
   background: #4070f4;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+ 
   overflow: hidden;
 }
 
