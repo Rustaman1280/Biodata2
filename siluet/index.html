@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembuat Siluet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        #preview {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #result {
+            margin-top: 20px;
+            display: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pembuat Siluet</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <canvas id="preview"></canvas>
+        <canvas id="result"></canvas>
+        <br>
+        <button onclick="downloadSilhouette()" id="downloadBtn">Download Siluet</button>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const previewCanvas = document.getElementById('preview');
+        const resultCanvas = document.getElementById('result');
+        const downloadBtn = document.getElementById('downloadBtn');
+        let ctx, resultCtx;
+
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    previewCanvas.width = img.width;
+                    previewCanvas.height = img.height;
+                    resultCanvas.width = img.width;
+                    resultCanvas.height = img.height;
+                    
+                    ctx = previewCanvas.getContext('2d');
+                    resultCtx = resultCanvas.getContext('2d');
+                    
+                    ctx.drawImage(img, 0, 0);
+                    previewCanvas.style.display = 'block';
+                    createSilhouette(img);
+                }
+                img.src = event.target.result;
+            }
+            reader.readAsDataURL(file);
+        });
+
+        function createSilhouette(img) {
+            // Draw image to temporary canvas
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = img.width;
+            tempCanvas.height = img.height;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(img, 0, 0);
+            
+            // Get image data
+            const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+            const data = imageData.data;
+            
+            // Convert to silhouette
+            for (let i = 0; i < data.length; i += 4) {
+                // Remove background (assuming white background)
+                if (data[i] > 200 && data[i+1] > 200 && data[i+2] > 200) {
+                    data[i+3] = 0; // Set alpha to transparent
+                } else {
+                    // Convert to black
+                    data[i] = 0;    // Red
+                    data[i+1] = 0;  // Green
+                    data[i+2] = 0;  // Blue
+                }
+            }
+            
+            // Draw result
+            resultCtx.putImageData(imageData, 0, 0);
+            resultCanvas.style.display = 'block';
+            downloadBtn.style.display = 'inline-block';
+        }
+
+        function downloadSilhouette() {
+            const link = document.createElement('a');
+            link.download = 'silhouette.png';
+            link.href = resultCanvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
